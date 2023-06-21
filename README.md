@@ -94,7 +94,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 ### useToast
 
-​  
 **Return value**  
 toast 함수를 반환합니다.
 
@@ -102,8 +101,8 @@ toast 함수를 반환합니다.
 
 함수가 호출되면 Toast UI를 화면에 나타냅니다.
 
-**Parameters**
-`useToast` hook은 optional object를 받을 수 있습니다.
+**Parameters**  
+`toast` 함수는 optional object를 받을 수 있습니다.
 
 - variant (optional)
   - Type - `"default" | "success"`
