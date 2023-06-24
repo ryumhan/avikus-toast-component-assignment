@@ -1,5 +1,7 @@
+import Example from "./example";
+
 const App = () => {
-  return <div className="grow flex flex-col bg-[#FEFBEF]"></div>;
+  return <Example />;
 };
 
 export default App;
