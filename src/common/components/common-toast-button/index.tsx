@@ -1,10 +1,10 @@
-import { IToastProps } from "~/common/hook/useToast/useToast.type";
+import { ToastProps } from "~/common/hook/useToast/useToast.type";
 import CommonButton from "../common-button";
 import useToast from "~/common/hook/useToast";
 
 interface Props {
   title: string;
-  toastProps: IToastProps;
+  toastProps: ToastProps;
 }
 
 const CommonToastButton = ({

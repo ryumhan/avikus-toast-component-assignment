@@ -3,7 +3,7 @@ import { Variant } from "~/common/hook/useToast/useToast.type";
 import { GlobalColor, Horizontal } from "~/common/style";
 
 const ToastBoxHeight = 50;
-const StackMargin = 5;
+const StackMargin = 6;
 
 export const DEFAULT_POSITION = "bottom-right";
 
@@ -17,19 +17,36 @@ export type ToastPositionType =
 
 export interface ToastStyledProps {
   position?: ToastPositionType;
-  no: number;
+  stackNo: number;
 }
 
 interface ToastVariantProps {
   type: Variant;
 }
 
+/**
+ * ToastContainer can be located as position input user passed
+ * using stackNo, toast element is displayed with little margin
+ */
 export const ToastContainer = styled.div<ToastStyledProps>(
-  ({ position = DEFAULT_POSITION, no }) => ({
+  ({ position = DEFAULT_POSITION, stackNo }) => ({
+    zIndex: "999",
     width: "100%",
     height: ToastBoxHeight + "px",
-    position: "fixed",
     display: "flex",
+    position: "fixed",
+    top: `${
+      position.includes("top")
+        ? `${stackNo * ToastBoxHeight + StackMargin + 10}px`
+        : "auto"
+    }`,
+    bottom: `${
+      position.includes("bottom")
+        ? `${stackNo * ToastBoxHeight + StackMargin + 10}px`
+        : "auto"
+    }`,
+    left: `${position.includes("left") ? "10px" : "auto"}`,
+    right: `${position.includes("right") ? "10px" : "auto"}`,
     justifyContent: `${
       position.includes("center")
         ? "center"
@@ -37,36 +54,23 @@ export const ToastContainer = styled.div<ToastStyledProps>(
         ? "flex-start"
         : "flex-end"
     }`,
-    top: `${
-      position.includes("top")
-        ? `${no * ToastBoxHeight + StackMargin + 10}px`
-        : "auto"
-    }`,
-    bottom: `${
-      position.includes("bottom")
-        ? `${no * ToastBoxHeight + StackMargin + 10}px`
-        : "auto"
-    }`,
-    left: `${position.includes("left") ? "10px" : "auto"}`,
-    right: `${position.includes("right") ? "10px" : "auto"}`,
-    zIndex: "9999",
   })
 );
 
 export const Toast = styled(Horizontal)<ToastVariantProps>(({ type }) => ({
+  padding: "10px 15px",
+  width: "230px",
   alignItems: "center",
+  justifyContent: "space-between",
   backgroundColor: GlobalColor.normal,
+  marginBottom: "10px",
+  borderRadius: "5px",
+  boxShadow: "rgba(0, 0, 0, 0.5) 2px 2px 10px",
   border: `${
     type === "default"
       ? `3px groove ${GlobalColor.black01}`
       : `3px solid ${GlobalColor.success}`
   }`,
-  boxShadow: "rgba(0, 0, 0, 0.5) 2px 2px 10px",
-  borderRadius: "5px",
-  justifyContent: "space-between",
-  marginBottom: "10px",
-  padding: "10px 15px",
-  width: "230px",
 }));
 
 export const CloseBtn = styled(Horizontal)`

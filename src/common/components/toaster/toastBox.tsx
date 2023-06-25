@@ -16,18 +16,23 @@ const ToastBox = ({
   removeItemCallback,
   render,
 }: Props) => {
+  // if custom render exist
+  if (render) {
+    return (
+      <ToastContainer position={position} stackNo={no}>
+        {render()}
+      </ToastContainer>
+    );
+  }
+  // basic toast
   return (
-    <ToastContainer position={position} no={no}>
-      {render ? (
-        render()
-      ) : (
-        <Toast type={variant}>
-          <TypoGraphy type={"bold"} color={GlobalColor.black01} size={15}>
-            {message}
-          </TypoGraphy>
-          <CloseBtn onClick={() => removeItemCallback()}>X</CloseBtn>
-        </Toast>
-      )}
+    <ToastContainer position={position} stackNo={no}>
+      <Toast type={variant}>
+        <TypoGraphy type={"bold"} color={GlobalColor.black01} size={15}>
+          {message}
+        </TypoGraphy>
+        <CloseBtn onClick={() => removeItemCallback()}>X</CloseBtn>
+      </Toast>
     </ToastContainer>
   );
 };
